@@ -1,0 +1,25 @@
+{
+  "name": "harry-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry-the-bot/server.git"
+  },
+  "author": "Harry Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harry-the-bot/server/issues"
+  },
+  "homepage": "https://github.com/harry-the-bot/server#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "node-static": "^0.7.8",
+    "socket.io": "1.2.0"
+  }
+}
