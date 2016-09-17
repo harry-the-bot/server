@@ -26,6 +26,16 @@ module.exports = {
             return null;
 
         return bot_rooms[bot_rooms.indexOf(rooms[0])];
+    },
+
+    destroyRoomByBotSocket: function(socket){
+        let rooms = bot_rooms.filter( room => room.bot_socket === socket );
+        if(rooms.length == 0)
+            return false;
+            console.log("remove");
+        let room_index = bot_rooms.indexOf(rooms[1]);
+         bot_rooms.splice(room_index);
+        return true;
     }
 
 }

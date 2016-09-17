@@ -41,6 +41,10 @@ let userWantsToJoinRoom = function(socket,bot_id){
 let io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
 
+    socket.on('disconnect', function() {
+        rooms.destroyRoomByBotSocket(socket);
+    });
+
     socket.on('bot-hello', (bot_id) => {
         console.log("bot-hello");
         botRequestedRoomCreation(socket,bot_id)
