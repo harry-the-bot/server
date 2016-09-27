@@ -28,11 +28,18 @@ module.exports = {
         return bot_rooms[bot_rooms.indexOf(rooms[0])];
     },
 
+    getRoomBySocket: function(socket,checkUser){
+        return bot_rooms.filter( room => ( checkUser ?
+                                                room.bot_socket === socket ||
+                                                room.user_socket === socket :
+                                                room.bot_socket === socket) );
+    },
+
     destroyRoomByBotSocket: function(socket){
-        let rooms = bot_rooms.filter( room => room.bot_socket === socket );
+        let rooms = this.getRoomBySocket(socket);
         if(rooms.length == 0)
             return false;
-            
+
         let room_index = bot_rooms.indexOf(rooms[1]);
          bot_rooms.splice(room_index);
         return true;
