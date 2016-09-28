@@ -4,6 +4,76 @@ var connectedToBot = false;
 
 setTimeout( start, 1000 );
 
+/******* MOVEMENT **************/
+var currentMovementInterval;
+function goForward(){
+    if(currentMovementInterval != null)
+        return;
+    console.log("triggered");
+    currentMovementInterval = setInterval( () => {
+        console.log("Forward!");
+    },300)
+}
+
+function goBackward(){
+    if(currentMovementInterval != null)
+        return;
+
+    currentMovementInterval = setInterval( () => {
+        console.log("Backward!");
+    },300)
+}
+
+function turnLeft(){
+    if(currentMovementInterval != null)
+        return;
+
+    currentMovementInterval = setInterval( () => {
+        console.log("Turning left!");
+    },300)
+}
+
+function turnRight(){
+    if(currentMovementInterval != null)
+        return;
+        
+    currentMovementInterval = setInterval( () => {
+        console.log("Turning right!");
+    },300)
+}
+
+function stop(){
+    console.log("Stop!");
+    clearInterval(currentMovementInterval);
+    currentMovementInterval = null;
+}
+
+document.addEventListener("keydown", (e) => {
+    if(currentMovementInterval != null)
+        return;
+    switch(e.keyCode){
+        case 38:
+            return goForward();
+        case 40:
+            return goBackward();
+        case 37:
+            return turnLeft();
+        case 39:
+            return turnRight();
+    }
+});
+
+document.addEventListener("keyup", (e) => {
+    switch(e.keyCode){
+        case 38:
+        case 40:
+        case 37:
+        case 39:
+            return stop();
+    }
+});
+
+/******* CALL **************/
 function start(){
     var videoObject = document.getElementById("user-video");
     turnVideoOn(videoObject);

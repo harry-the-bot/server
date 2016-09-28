@@ -3,10 +3,16 @@ html
   head
     meta(charset='utf-8')
     title  Harry - User
-    link(rel='sylesheet', href='/stylesheets/call.css', media='all')
+    link(rel='stylesheet', href='/stylesheets/call.css')
   body
-    video#bot-video(autoplay='')
-    video#user-video(autoplay='')
+    div#stage
+        video#bot-video(autoplay='')
+        video#user-video(autoplay='')
+        div#controls
+            button#forward(onMouseDown='goForward()', onMouseUp='stop()') F
+            button#backward(onMouseDown='goBackward()', onMouseUp='stop()') B
+            button#left(onMouseDown='turnLeft()', onMouseUp='stop()') L
+            button#right(onMouseDown='turnRight()', onMouseUp='stop()') R
     script(src='/socket.io/socket.io.js')
     script(src='/scripts/vendor/webrtc/adapter.js')
     script(src='/scripts/call.js')
