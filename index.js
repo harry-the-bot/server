@@ -1,6 +1,7 @@
 'use strict';
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const handleSocketConnection = require('./src/socket');
@@ -9,7 +10,7 @@ const session = require('express-session');
 const crypto = require('crypto');
 const nocache = require('nocache')
 const referrerPolicy = require('referrer-policy')
-
+const path = require('path');
 
 app.use(helmet());
 app.use(referrerPolicy({ policy: 'same-origin' }))
@@ -30,6 +31,16 @@ app.use( session({
         saveUninitialized: true
     })
 );
+
+//Views and Static files
+app.set('view engine', 'jade');
+app.set('views', path.join(__dirname,'public','views'));
+
+app.use('/images', express.static(path.join(__dirname,'public','images')));
+app.use('/scripts', express.static(path.join(__dirname,'public','js')));
+app.use('/stylesheets', express.static(path.join(__dirname,'public','css')));
+app.use('/fonts', express.static(path.join(__dirname,'public','fonts')));
+
 
 server.listen(8091);
 app.use('/', require('./src/web'));

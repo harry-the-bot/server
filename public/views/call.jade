@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title  Harry - User
+    link(rel='sylesheet', href='/stylesheets/call.css', media='all')
+  body
+    video#bot-video(autoplay='')
+    video#user-video(autoplay='')
+    script(src='/socket.io/socket.io.js')
+    script(src='/scripts/vendor/webrtc/adapter.js')
+    script(src='/scripts/call.js')
