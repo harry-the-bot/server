@@ -1,5 +1,4 @@
-const rooms = require('../../core/room/bot-room');
-//@TODO refactor pls :fire:
+const rooms = require('./room.js');
 
 let botRequestedRoomCreation = function(socket,botId){
     if(rooms.botRoomExists(botId)){
@@ -26,18 +25,14 @@ let userWantsToJoinRoom = function(socket,botId){
 
     room.botSocket.emit('user-joined');
     console.log('success');
-    console.log(room.botDescription);
-    socket.emit('user-joined-room-successfully', room.botDescription);
-    return socket;
+    return socket.emit('user-joined-room-successfully');
 }
 
-
-module.exports = function(socket) {
-
+let io = socketIO.listen(app);
+io.sockets.on('connection', function(socket) {
     socket.on("aaa", (a) =>{
         console.log("AAAA",a);
     })
-
     socket.on('disconnect', function() {
         rooms.destroyRoomByBotSocket(socket);
     });
@@ -50,7 +45,9 @@ module.exports = function(socket) {
     socket.on('user-join', (botId) => {
         console.log("user-join");
         userWantsToJoinRoom(socket,botId)
-    })
+    });
+
+
 
     socket.on('bot-description', (description) => {
         console.log("got bot description")
@@ -106,21 +103,6 @@ module.exports = function(socket) {
 
     })
 
-    socket.on('ice-candidate', (candidate) => {
-        console.log('got ice candidate');
-        let sockRooms = rooms.getRoomBySocket(socket);
-        if(sockRooms.length === 0)
-            return;
-
-        let room = sockRooms[0];
-        if(socket === room.userSocket)
-            room.botSocket.emit('ice-candidate',candidate);
-        else{
-            if(room.userSocket != null)
-                room.userSocket.emit('ice-candidate',candidate)
-        }
-    })
-
     socket.on('ipaddr', function() {
         let ifaces = os.networkInterfaces();
         for (let dev in ifaces) {
@@ -137,4 +119,4 @@ module.exports = function(socket) {
         console.log('received bye');
     });
 
-}
+});

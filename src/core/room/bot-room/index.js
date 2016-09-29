@@ -1,26 +1,28 @@
 let bot_rooms = [];
 
 module.exports = {
-    botRoomExists: function(bot_id){
-        return bot_rooms.filter( room => room.bot_id === bot_id ).length > 0;
+    botRoomExists: function(botId){
+        return bot_rooms.filter( room => room.botId === botId ).length > 0;
     },
 
-    createBotRoom: function(bot_socket, bot_id){
-        if(this.botRoomExists(bot_id))
+    createBotRoom: function(botSocket, botId){
+        if(this.botRoomExists(botId))
             return;
 
         let room = {
-            bot_id: bot_id,
-            bot_socket: bot_socket,
-            user_socket: null,
+            botId: botId,
+            botSocket: botSocket,
+            userSocket: null,
+            botDescription: null,
+            userDescription: null
         }
 
         bot_rooms.push(room);
         return bot_rooms.indexOf(room);
     },
 
-    getRoom: function(bot_id){
-        let rooms = bot_rooms.filter( room => room.bot_id === bot_id );
+    getRoom: function(botId){
+        let rooms = bot_rooms.filter( room => room.botId === botId );
 
         if( rooms.length < 1 )
             return null;
@@ -30,9 +32,9 @@ module.exports = {
 
     getRoomBySocket: function(socket,checkUser){
         return bot_rooms.filter( room => ( checkUser ?
-                                                room.bot_socket === socket ||
-                                                room.user_socket === socket :
-                                                room.bot_socket === socket) );
+                                                room.botSocket === socket ||
+                                                room.userSocket === socket :
+                                                room.botSocket === socket) );
     },
 
     destroyRoomByBotSocket: function(socket){
