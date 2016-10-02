@@ -1,7 +1,7 @@
 'use strict';
 var router = require('express').Router();
 
-router.get('/bot',(req,res) => {
+router.get('/',(req,res) => {
     res.render('call');
 })
 
