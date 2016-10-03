@@ -9,10 +9,10 @@ html
         video#bot-video(autoplay='')
         video#user-video(autoplay='')
         div#controls
-            button#forward(onMouseDown='goForward()', onMouseUp='stop()') F
-            button#backward(onMouseDown='goBackward()', onMouseUp='stop()') B
-            button#left(onMouseDown='turnLeft()', onMouseUp='stop()') L
-            button#right(onMouseDown='turnRight()', onMouseUp='stop()') R
+            button#forward(onMouseDown='controls.goForward()', onMouseUp='controls.stop()') F
+            button#backward(onMouseDown='controls.goBackward()', onMouseUp='controls.stop()') B
+            button#left(onMouseDown='controls.turnLeft()', onMouseUp='controls.stop()') L
+            button#right(onMouseDown='controls.turnRight()', onMouseUp='controls.stop()') R
     script(src='/socket.io/socket.io.js')
     script(src='/scripts/vendor/webrtc/adapter.js')
     script(src='/scripts/P2P/Call.js')

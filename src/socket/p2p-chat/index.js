@@ -55,7 +55,9 @@ module.exports = function(socket) {
 
         let room = sockRooms[0];
 
+        console.log("Someone disconnected");
         if(socket === room.userSocket){
+            console.log("user_disconnect");
             room.userSocket = null;
             return;
         }
@@ -85,6 +87,7 @@ module.exports = function(socket) {
         room.userSocket.emit('bot-created-offer',description);
     });
 
+    //Bot alled user and user answered the call
     socket.on('user-answered-offer', (description) => {
         console.log("user-answered-offer")
         let sockRooms = rooms.getRoomBySocket(socket,true);
@@ -95,6 +98,7 @@ module.exports = function(socket) {
         room.botSocket.emit('user-answered-offer',description);
     });
 
+    //Bot and user are sharing ice candidates
     socket.on('ice-candidate', (candidate) => {
         console.log('ice-candidate');
         let sockRooms = rooms.getRoomBySocket(socket,true);
@@ -102,14 +106,23 @@ module.exports = function(socket) {
             return;
 
         let room = sockRooms[0];
-        console.log(socket === room.userSocket, socket === room.botSocket)
+
         if(socket === room.userSocket){
             room.botSocket.emit('ice-candidate',candidate);
-            console.log("send to bot")
         }else{
             room.userSocket.emit('ice-candidate',candidate);
-            console.log("send to user")
         }
+    })
+
+    //user is telling where the bot shoud go
+    socket.on("move", (to) => {
+        console.log("Moving!",to);
+        let sockRooms = rooms.getRoomBySocket(socket,true);
+        if(sockRooms.length === 0)
+            return;
+        console.log("Sent movement!");
+        let room = sockRooms[0];
+        room.botSocket.emit("move",to);
     })
 
 }

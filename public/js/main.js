@@ -1,14 +1,15 @@
 'use strict';
 
+var controls;
 window.onload = () => {
     var call = new UserCall();
-    var userSocket = io("http://192.168.0.101:8091");
+    var userSocket = io("http://192.168.0.109:8091");
 
     call.setSocket(userSocket);
     call.setRemoteVideo(document.getElementById('bot-video'));
     call.setLocalVideo(document.getElementById('user-video'));
 
-    var afterPrepareSuccess = userVideoIsEnabled.bind(this,call);
+    var afterPrepareSuccess = userVideoIsEnabled.bind(this,call,userSocket);
 
     call.prepare()
         .then( afterPrepareSuccess, () => {
@@ -17,8 +18,11 @@ window.onload = () => {
 }
 
 
-function userVideoIsEnabled(call){
+function userVideoIsEnabled(call,userSocket){
     console.info("Video is enabled");
     call.startListening();
     call.connectTo(1);
+
+    controls = new BotRemoteControl();
+    controls.setSocket(userSocket);
 }

@@ -148,3 +148,10 @@ div#stage video#user-video {
   top: 15px;
   right: 15px;
 }
+div#stage div#controls {
+  position: absolute;
+  width: 35%;
+  height: 35px;
+  right: 15px;
+  botom: 10px;
+}
