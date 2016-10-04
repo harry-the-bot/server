@@ -12,7 +12,7 @@ module.exports = {
     },
 
     start: function(){
-        console.log("A");
+        
         port = new SerialPort(portName,{
              'baudRate': baudRate
          });
@@ -48,7 +48,7 @@ module.exports = {
         dataListeners.push(fn);
     },
 
-    send: function(data){        
+    send: function(data){
         console.log("Sending to arduino ",data);
         port.write(data);
 
