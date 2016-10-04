@@ -24,6 +24,7 @@
     "express-session": "^1.14.1",
     "helmet": "^2.2.0",
     "jade": "^1.11.0",
+    "serialport": "^4.0.1",
     "socket.io": "1.2.0"
   }
 }

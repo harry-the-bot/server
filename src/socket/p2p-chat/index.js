@@ -1,5 +1,15 @@
 const rooms = require('../../core/room/bot-room');
+const arduinoInterface = require('../../core/arduino');
+
 //@TODO refactor pls :fire:
+
+console.log(arduinoInterface);
+
+arduinoInterface.setPortName("COM3");
+arduinoInterface.addListener( function(data) {
+    console.log("ARDUINO SAID -> " + data);
+})
+arduinoInterface.start();
 
 let botRequestedRoomCreation = function(socket,botId){
 
@@ -123,6 +133,9 @@ module.exports = function(socket) {
         console.log("Sent movement!");
         let room = sockRooms[0];
         room.botSocket.emit("move",to);
+
+        let movement_string = "M"+to.direction+";";
+        arduinoInterface.send(movement_string);
     })
 
 }
