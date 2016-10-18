@@ -136,22 +136,51 @@ div#stage {
 div#stage video#bot-video {
   width: 100%;
   height: 100%;
-  background-color: #CCC;
+  background-color: #2A2A2A;
   z-index: 1;
 }
 div#stage video#user-video {
   position: absolute;
   width: 20%;
   height: 20%;
-  background-color: #FF00CC;
+  background-color: #000;
   z-index: 2;
   top: 15px;
   right: 15px;
 }
 div#stage div#controls {
   position: absolute;
-  width: 35%;
-  height: 35px;
+  width: 328px;
+  height: 240px;
   right: 15px;
-  botom: 10px;
+  top: 50%;
+}
+div#stage div#controls button {
+  position: relative;
+  width: 82px;
+  height: 58px;
+  border: none;
+  background-image: url('/images/arrow.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  opacity: .7;
+}
+div#stage div#controls button#forward {
+  left: -10px;
+  top: 0px;
+}
+div#stage div#controls button#backward {
+  transform: rotate(180deg);
+  left: -90px;
+  top: 160px;
+}
+div#stage div#controls button#left {
+  transform: rotate(-90deg);
+  top: 80px;
+  left: 0px;
+}
+div#stage div#controls button#right {
+  transform: rotate(90deg);
+  top: 80px;
+  left: -100px;
 }

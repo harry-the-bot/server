@@ -12,7 +12,7 @@ module.exports = {
     },
 
     start: function(){
-        
+
         port = new SerialPort(portName,{
              'baudRate': baudRate
          });
@@ -20,9 +20,9 @@ module.exports = {
         return new Promise( (resolve, reject) => {
 
              port.on('open', () => {
-                 console.log("Port is open");
                  port.on('data', (data) => {
                      if(data === 'HEL'){
+                         console.log("Bot said Hello!");
                          isOpen = true;
                          return;
                      }

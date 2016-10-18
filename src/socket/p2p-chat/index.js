@@ -5,7 +5,7 @@ const arduinoInterface = require('../../core/arduino');
 
 console.log(arduinoInterface);
 
-arduinoInterface.setPortName("COM3");
+arduinoInterface.setPortName("COM4");
 arduinoInterface.addListener( function(data) {
     console.log("ARDUINO SAID -> " + data);
 })
