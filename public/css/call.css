@@ -164,6 +164,7 @@ div#stage div#controls button {
   background-repeat: no-repeat;
   background-color: transparent;
   opacity: .7;
+  cursor: pointer;
 }
 div#stage div#controls button#forward {
   left: -10px;
