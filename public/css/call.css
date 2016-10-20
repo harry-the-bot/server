@@ -143,23 +143,63 @@ div#stage video#bot-video {
   background-color: #2A2A2A;
   z-index: 1;
 }
-div#stage video#user-video {
+div#stage div#user-container {
   position: absolute;
-  width: 20%;
-  height: 20%;
-  background-color: #000;
+  overflow: overlay;
+  float: left;
+  width: 25%;
   z-index: 2;
   top: 15px;
   right: 15px;
 }
-div#stage div#controls {
-  position: absolute;
+div#stage div#user-container div#user-vision {
+  position: relative;
+  font-size: 2px;
+}
+div#stage div#user-container div#user-vision div#front-sensor {
+  height: 1%;
+  width: 100%;
+  clear: both;
+  float: left;
+  background: linear-gradient(-90deg, red, green);
+}
+div#stage div#user-container div#user-vision div#left-sensor {
+  height: 93%;
+  height: 214px;
+  width: 1%;
+  float: left;
+  background: linear-gradient(green, yellow);
+  align-items: stretch;
+}
+div#stage div#user-container div#user-vision video#user-video {
+  float: left;
+  width: 98%;
+  max-width: 98%;
+  background-color: #000;
+}
+div#stage div#user-container div#user-vision div#right-sensor {
+  height: 93%;
+  width: 1%;
+  height: 214px;
+  float: left;
+  background: linear-gradient(yellow, green);
+}
+div#stage div#user-container div#user-vision div#back-sensor {
+  clear: both;
+  height: 1%;
+  width: 100%;
+  float: left;
+  background: linear-gradient(-90deg, red, green);
+}
+div#stage div#user-container div#controls {
+  float: left;
+  clear: both;
   width: 328px;
   height: 240px;
-  right: 15px;
-  top: 50%;
+  margin-top: 30px;
+  margin-left: 15%;
 }
-div#stage div#controls button {
+div#stage div#user-container div#controls button {
   position: relative;
   width: 82px;
   height: 58px;
@@ -170,21 +210,21 @@ div#stage div#controls button {
   opacity: .7;
   cursor: pointer;
 }
-div#stage div#controls button#forward {
+div#stage div#user-container div#controls button#forward {
   left: -10px;
   top: 0px;
 }
-div#stage div#controls button#backward {
+div#stage div#user-container div#controls button#backward {
   transform: rotate(180deg);
   left: -90px;
   top: 160px;
 }
-div#stage div#controls button#left {
+div#stage div#user-container div#controls button#left {
   transform: rotate(-90deg);
   top: 80px;
   left: 0px;
 }
-div#stage div#controls button#right {
+div#stage div#user-container div#controls button#right {
   transform: rotate(90deg);
   top: 80px;
   left: -100px;

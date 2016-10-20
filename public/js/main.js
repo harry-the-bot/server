@@ -32,6 +32,19 @@ function userVideoIsEnabled(call,userSocket){
     controls.setBackwardButton(document.getElementById("backward"));
     controls.setRightButton(document.getElementById("right"));
     controls.addTouchListeners(document);
+    initializeSensors();
+    console.log(sensorState);
 
+}
+
+var sensorState = [];
+var sensorCount = 8;
+
+function initializeSensors(){
+    sensorState = Array(sensorCount).fill(0);
+
+}
+
+function setSensorState(sensor,state){
 
 }
