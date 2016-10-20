@@ -9,9 +9,9 @@ html
         video#bot-video(autoplay='')
         video#user-video(autoplay='')
         div#controls
-            button#left(onMouseDown='controls.turnLeft()', onMouseUp='controls.stop()')
+            button#left(onMouseDown='controls.turnLeft()', touchstart='controls.turnLeft()', onMouseUp='controls.stop()', touchend='controls.stop() ')
             button#forward(onMouseDown='controls.goForward()', onMouseUp='controls.stop()')
-            button#backward(onMouseDown='controls.goBackward()', onMouseUp='controls.stop()')            
+            button#backward(onMouseDown='controls.goBackward()', onMouseUp='controls.stop()')
             button#right(onMouseDown='controls.turnRight()', onMouseUp='controls.stop()')
     script(src='/socket.io/socket.io.js')
     script(src='/scripts/vendor/webrtc/adapter.js')

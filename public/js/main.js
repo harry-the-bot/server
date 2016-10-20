@@ -25,4 +25,13 @@ function userVideoIsEnabled(call,userSocket){
 
     controls = new BotRemoteControl();
     controls.setSocket(userSocket);
+    controls.addKeyListeners(document);
+
+    controls.setForwardButton(document.getElementById("forward"));
+    controls.setLeftButton(document.getElementById("left"));
+    controls.setBackwardButton(document.getElementById("backward"));
+    controls.setRightButton(document.getElementById("right"));
+    controls.addTouchListeners(document);
+
+
 }
