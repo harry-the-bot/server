@@ -76,6 +76,7 @@ function BotRemoteControl(){
         currentMovementInterval = null;
     }
 
+
     this.sendSignal = function(direction, speed){
         if(direction.length === 0)
             direction = 'S';
@@ -100,7 +101,18 @@ function BotRemoteControl(){
         });
     }
 
+    this.setLedState = function(color,state){
+        let obj = { 'color': color}
+        if(typeof state !== 'undefined'){
+            obj.state = state;
+        }
+
+        socket.emit("change-led-color",obj);
+
+    }
+
 }
+
 
 BotRemoteControl.prototype.goForward = function(e){
 

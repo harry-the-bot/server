@@ -47,16 +47,25 @@ server.listen(8091);
 app.use('/', require('./src/web'));
 io.on('connection', handleSocketConnection);
 
-
+//Initializing arduino
 //@TODO fix bot interface and move this stuff to the right place
 arduinoInterface.setPortName("COM4");
 arduinoInterface.addListener( function(data) {
     let aux = data.split('');
     if(aux[0] === 'S'){
-
+        io.sockets.emit('sensor-report', data);
     }
 
 })
-arduinoInterface.start();
+arduinoInterface.start().then( () => {
+    setTimeout( () => {
+        console.log(arduinoInterface.send("LCFF0000;"))//red leds
+    },1000)
+
+    setTimeout(  () => {
+        console.log(arduinoInterface.send("LS1;"))//blinking leds
+    },1600);
+
+})
 
 console.log("Running.");

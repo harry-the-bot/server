@@ -6,6 +6,8 @@ var port;
 var dataListeners = [];
 var data_acm = "";
 
+var commandPool = [];
+
 const processData = function(data){
     let aux = data.toString();
     aux = aux.replace(/(\r\n|\n|\r)/gm,"");
@@ -55,16 +57,15 @@ module.exports = {
         return new Promise( (resolve, reject) => {
 
              port.on('open', () => {
-                 port.on('data', (data) => {
+                 return resolve();
+             })
 
-                     processData(data);
+             port.on('data', (data) => {
+                 processData(data);
+             })
 
-
-                 })
-
-                 port.on('error', (err) => {
-                     console.warn(err)
-                 })
+             port.on('error', (err) => {
+                 console.warn(err)
              })
         })
     },
@@ -78,6 +79,10 @@ module.exports = {
     },
 
     send: function(data){
+        if(!port.isOpen()){
+            return false;
+        }
+        
         console.log("Sending to arduino ",data);
         port.write(data);
 

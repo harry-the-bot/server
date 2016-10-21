@@ -127,4 +127,13 @@ module.exports = function(socket) {
         arduinoInterface.send(movement_string);
     })
 
+    socket.on("change-led-color", (color) => {
+        arduinoInterface.send("LC" + color.color +";")
+
+        if(typeof color.state != 'undefined')
+            setTimeout(  () => {
+                arduinoInterface.send("LS"+color.state+";")
+            },600);
+    })
+
 }
