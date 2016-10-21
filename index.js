@@ -5,6 +5,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const handleSocketConnection = require('./src/socket');
+const arduinoInterface = require('./src/core/arduino');
 const helmet = require('helmet');
 const session = require('express-session');
 const crypto = require('crypto');
@@ -45,3 +46,17 @@ app.use('/fonts', express.static(path.join(__dirname,'public','fonts')));
 server.listen(8091);
 app.use('/', require('./src/web'));
 io.on('connection', handleSocketConnection);
+
+
+//@TODO fix bot interface and move this stuff to the right place
+arduinoInterface.setPortName("COM4");
+arduinoInterface.addListener( function(data) {
+    let aux = data.split('');
+    if(aux[0] === 'S'){
+
+    }
+
+})
+arduinoInterface.start();
+
+console.log("Running.");

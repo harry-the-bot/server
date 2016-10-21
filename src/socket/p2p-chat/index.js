@@ -1,16 +1,6 @@
 const rooms = require('../../core/room/bot-room');
 const arduinoInterface = require('../../core/arduino');
 
-//@TODO refactor pls :fire:
-
-console.log(arduinoInterface);
-
-arduinoInterface.setPortName("COM4");
-arduinoInterface.addListener( function(data) {
-    console.log("ARDUINO SAID -> " + data);
-})
-arduinoInterface.start();
-
 let botRequestedRoomCreation = function(socket,botId){
 
     botId = parseInt(botId);
@@ -53,7 +43,6 @@ let userWantsToJoinRoom = function(socket,botId){
     socket.emit('user-joined-room-successfully');
     return socket;
 }
-
 
 module.exports = function(socket) {
 
