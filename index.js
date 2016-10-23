@@ -49,7 +49,7 @@ io.on('connection', handleSocketConnection);
 
 //Initializing arduino
 //@TODO fix bot interface and move this stuff to the right place
-arduinoInterface.setPortName("COM4");
+arduinoInterface.setPortName("COM3");
 arduinoInterface.addListener( function(data) {
     let aux = data.split('');
     if(aux[0] === 'S'){
