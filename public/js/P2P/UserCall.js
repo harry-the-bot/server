@@ -1,12 +1,14 @@
-function UserCall(){
+function UserCall(_config){
 
     var peerConnection;
+    var config = _config;
 
     this.getPeerConnection = function(){
         return peerConnection;
     }
     this.createPeerConnection = function(){
-        peerConnection = new RTCPeerConnection(null);
+        console.log("config is", config);
+        peerConnection = new RTCPeerConnection(config);
         peerConnection.onicecandidate = handleIceCandidate.bind(this);
         peerConnection.onaddstream = handleRemoteStreamAdded.bind(this);
         peerConnection.onremovestream = handleRemoteStreamRemoved.bind(this);

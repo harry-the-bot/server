@@ -2,23 +2,62 @@
 
 var controls;
 window.onload = () => {
-    var call = new UserCall();
-    var userSocket = io("/");
 
-    userSocket.on('sensor-report', handleSensorReport);
+    var pcConfig = {
+      'iceServers': [{
+        'url': 'stun:stun.l.google.com:19302'
+      }]
+    };
+    requestTurn("https://computeengineondemand.appspot.com/turn?username=qaasd34234&key=asdjkagbdasghdwy34r3",pcConfig)
+        .then( (config) => {
+            var call = new UserCall(config);
+            var userSocket = io("/");
 
-    call.setSocket(userSocket);
-    call.setRemoteVideo(document.getElementById('bot-video'));
-    call.setLocalVideo(document.getElementById('user-video'));
+            userSocket.on('sensor-report', handleSensorReport);
 
-    var afterPrepareSuccess = userVideoIsEnabled.bind(this,call,userSocket);
+            call.setSocket(userSocket);
+            call.setRemoteVideo(document.getElementById('bot-video'));
+            call.setLocalVideo(document.getElementById('user-video'));
 
-    call.prepare()
-        .then( afterPrepareSuccess, () => {
-            console.log("nop");
+            var afterPrepareSuccess = userVideoIsEnabled.bind(this,call,userSocket);
+
+            call.prepare()
+                .then( afterPrepareSuccess, () => {
+                    console.log("nop");
+                });
         });
 }
 
+function requestTurn(turnURL, pcConfig) {
+    return new Promise( (resolve,reject) => {
+
+        var turnExists = false;
+        for (var i in pcConfig.iceServers) {
+            if (pcConfig.iceServers[i].url.substr(0, 5) === 'turn:') {
+                turnExists = true;
+                break;
+            }
+        }
+
+        if (!turnExists) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var turnServer = JSON.parse(xhr.responseText);
+                    console.log('Got TURN server: ', turnServer);
+                    pcConfig.iceServers.push({
+                        'url': 'turn:' + turnServer.username + '@' + turnServer.turn,
+                        'credential': turnServer.password
+                    });
+                }
+                resolve(pcConfig);
+            };
+
+            xhr.open('GET', turnURL, true);
+            xhr.send();
+        }
+    })//Promise
+}
 
 function userVideoIsEnabled(call,userSocket){
     console.info("Video is enabled");
