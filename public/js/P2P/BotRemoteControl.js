@@ -30,7 +30,7 @@ function BotRemoteControl(){
     }
 
     this.getBackwardButton = function(){
-        return bacwardButton;
+        return backwardButton;
     }
     this.setBackwardButton = function(element){
 
