@@ -47,7 +47,7 @@ function UserCall(){
      ************************************************************************/
    function answerOffer(sessionDescription){
        console.info("Emitting session description", sessionDescription);
-       sessionDescription.sdp = preferOpus(sessionDescription.sdp);
+       //sessionDescription.sdp = preferOpus(sessionDescription.sdp);
        this.getPeerConnection().setLocalDescription(sessionDescription);
        this.getSocket().emit('user-answered-offer',sessionDescription);
    }
